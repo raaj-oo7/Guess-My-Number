@@ -34,7 +34,7 @@ main {
     justify-content: space-around;
 }
 
-.left {
+.left-side-section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,7 +43,7 @@ main {
     font-size: 2rem;
 }
 
-.right {
+.right-side-section {
     width: 52rem;
     font-size: 2rem;
 }
@@ -72,7 +72,7 @@ h1 {
     transform: translate(-50%, -50%);
 }
 
-.guess {
+.guess-number {
     height: 100px;
     width: 120px;
     font-size: 25px;
@@ -115,6 +115,8 @@ button:active {
 .play-again{
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 .message {
