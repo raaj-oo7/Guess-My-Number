@@ -47,7 +47,7 @@ document.querySelector('.check').addEventListener
         }
     });
 
-document.querySelector('.again').addEventListener('click', function () {
+document.querySelector('.play-again').addEventListener('click', function () {
     score = 20;
     secretNumber = Math.trunc(Math.random() * 20 + 1);
 
