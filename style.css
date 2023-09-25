@@ -16,7 +16,6 @@ body {
         sans-serif;
     color: #eee;
     background-color: #222;
-    /* background-color: #60b347;  */
 }
 
 /* LAYOUT */
@@ -81,7 +80,13 @@ h1 {
     margin: auto;
     font-family: 'Press Start 2P',
         sans-serif;
-    
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .between {
@@ -91,19 +96,33 @@ h1 {
     flex-direction: row-reverse;
 }
 
-.btn {
-    font-family: 'Press Start 2P',
-    sans-serif;
+.button {
+    font-family: 'Press Start 2P', sans-serif;
     height: 30px;
     padding: 5px;
     margin-top: 15px;
+    border-radius: 5px;
 }
 
-.message{
+.button:hover,
+button:active {
+    transition: 0.3s;
+    border: 3px solid #f6f6f6;
+    color: #f6f6f6;
+    background: #222;
+}
+
+.play-again{
+    display: flex;
+    justify-content: center;
+}
+
+.message {
     margin: 20px;
     margin-bottom: 50px;
 }
 
-.label-score, .label-highscore{
+.label-score,
+.label-highscore {
     margin: 20px;
 }
