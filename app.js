@@ -1,65 +1,74 @@
+'use strict';
+
+const numberElement = document.querySelector('.number');
+const guessNumber = document.querySelector('.guess-number');
+const body = document.querySelector('body');
+const scores = document.querySelector('.score');
+const checkButton = document.querySelector('.check');
+const playAgainButton = document.querySelector('.play-again');
+const onDisplayMessage = document.querySelector('.message');
+let updateHighScore = document.querySelector('.high-score');
+
 let secretNumber = Math.trunc(Math.random() * 20 + 1);
 let score = 20;
-let highscore = 0;
+let highScore = 0;
 
-const displayMessage = function (message) {
-    document.querySelector('.message').textContent = message;
+const displayMessage = (message) => {
+    onDisplayMessage.textContent = message;
+};
+function checkGuessNumber() {
+    const guess = guessNumber.valueAsNumber;
+
+    // when there is no input
+    if (!guess) {
+        displayMessage('⛔ No Number!')
+    }
+
+    // when player wins
+    else if (guess === secretNumber) {
+        displayMessage('🎉 Correct Number!')
+
+        numberElement.textContent = secretNumber;
+
+        body.style.backgroundColor = '#60b347';
+
+        numberElement.style.width = '30rem';
+
+        if (score > highScore) {
+            highScore = score;
+            updateHighScore.textContent = highScore;
+        }
+    }
+
+    // when score is too high and too low
+    else if (guess !== secretNumber) {
+        if (score > 1) {
+            displayMessage(guess > secretNumber ? '📈 To High!' : '📉 To Low!');
+            score--;
+            scores.textContent = score;
+        } else {
+            displayMessage('☹️ You Lost the game!')
+            scores.textContent = 0;
+        }
+    }
 }
 
-document.querySelector('.check').addEventListener
-    ('click', function () {
-        const guess = Number(document.querySelector('.guess-number').value);
-        console.log(guess, typeof guess);
-
-        // when there is no input
-        if (!guess) {
-            displayMessage('⛔ No Number!')
-        }
-
-        // when player wins
-        else if (guess === secretNumber) {
-            displayMessage('🎉 Correct Number!')
-
-            document.querySelector('.number').textContent = secretNumber;
-
-            document.querySelector('body').style.backgroundColor = '#60b347';
-
-            document.querySelector('.number').style.width = '30rem';
-
-            if (score > highscore) {
-                highscore = score;
-                document.querySelector('.highscore').textContent = highscore;
-            }
-        }
-
-        // when score is too high and too low
-        else if (guess !== secretNumber) {
-            if (score > 1) {
-                // document.querySelector('.message').textContent =
-                //    guess-number > secretNumber ? '📈 To High!' : '📉 To Low!';
-                displayMessage(guess > secretNumber ? '📈 To High!' : '📉 To Low!');
-                score--;
-                document.querySelector('.score').textContent = score;
-            } else {
-                displayMessage('☹️ You Lost the game!')
-                document.querySelector('.score').textContent = 0;
-            }
-        }
-    });
-
-document.querySelector('.play-again').addEventListener('click', function () {
+function resetGame() {
     score = 20;
     secretNumber = Math.trunc(Math.random() * 20 + 1);
 
     displayMessage('Start guessing...');
 
-    document.querySelector('.score').textContent = score;
+    scores.textContent = score;
 
-    document.querySelector('.number').textContent = '?';
+    numberElement.textContent = '?';
 
-    document.querySelector('.guess-number').value = '';
+    guessNumber.value = '';
 
-    document.querySelector('body').style.backgroundColor = '#222';
+    body.style.backgroundColor = '#222';
 
-    document.querySelector('.number').style.width = '15rem';
-});
+    numberElement.style.width = '15rem';
+}
+
+checkButton.addEventListener('click', checkGuessNumber);
+playAgainButton.addEventListener('click', resetGame);
